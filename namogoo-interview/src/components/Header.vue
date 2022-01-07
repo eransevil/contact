@@ -9,7 +9,7 @@
         >You have {{ contacts.length }} Contacts from
         {{ numberOfContrires }} different countries
       </span>
-      <span class="contacts-num" v-else> Contact mission</span>
+      <h3 class="contacts-num" v-else> CONTACT MISSION</h3>
     </div>
   </header>
 </template>
