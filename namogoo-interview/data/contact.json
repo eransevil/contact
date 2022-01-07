@@ -1,0 +1,170 @@
+[
+    {
+        "gender": "male",
+        "name": {
+            "title": "Mr",
+            "first": "Arthur",
+            "last": "Lawrence"
+        },
+        "location": {
+            "street": {
+                "number": 1586,
+                "name": "New Road"
+            },
+            "city": "Limerick",
+            "state": "Kilkenny",
+            "country": "Ireland",
+            "postcode": 71532,
+            "coordinates": {
+                "latitude": "18.0377",
+                "longitude": "-117.0706"
+            },
+            "timezone": {
+                "offset": "-9:00",
+                "description": "Alaska"
+            }
+        },
+        "email": "arthur.lawrence@example.com",
+        "login": {
+            "uuid": "0822786a-e583-465f-bda5-07e690f7b847",
+            "username": "redgoose155",
+            "password": "storage",
+            "salt": "7uInxw8B",
+            "md5": "fb40e47af5b4c49b7d5761c5f5eca347",
+            "sha1": "cbe2f00f317b1dc13b16452f97bbb0a25253dee1",
+            "sha256": "ce86ab1317e9331cc33eff867d65de322376a7df3ceb220cd9fc12e7b179d623"
+        },
+        "dob": {
+            "date": "1971-06-08T09:01:14.416Z",
+            "age": 51
+        },
+        "registered": {
+            "date": "2018-01-21T19:55:09.049Z",
+            "age": 4
+        },
+        "phone": "051-094-7524",
+        "cell": "081-536-5240",
+        "id": {
+            "name": "PPS",
+            "value": "5997832T"
+        },
+        "picture": {
+            "large": "https://randomuser.me/api/portraits/men/42.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/men/42.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/men/42.jpg"
+        },
+        "nat": "IE"
+    },
+    {
+        "gender": "female",
+        "name": {
+            "title": "Mrs",
+            "first": "Sophia",
+            "last": "Singh"
+        },
+        "location": {
+            "street": {
+                "number": 7305,
+                "name": "Vimy St"
+            },
+            "city": "Radisson",
+            "state": "Prince Edward Island",
+            "country": "Canada",
+            "postcode": "A0Y 5T4",
+            "coordinates": {
+                "latitude": "-59.7813",
+                "longitude": "46.4775"
+            },
+            "timezone": {
+                "offset": "+9:00",
+                "description": "Tokyo, Seoul, Osaka, Sapporo, Yakutsk"
+            }
+        },
+        "email": "sophia.singh@example.com",
+        "login": {
+            "uuid": "ed5ebeac-aa90-4d17-a397-e20329801d4d",
+            "username": "heavywolf225",
+            "password": "momoney",
+            "salt": "PJaZfBkp",
+            "md5": "307baf9dc84d72add7bbeb3d18fd5142",
+            "sha1": "d2b0f4ebc0f020c376199277a4dcf144717c8ae5",
+            "sha256": "b7fd559373c23a1fc16024cf6b0c7392a66ed40b3be0817d88a37edfcf6b9fe2"
+        },
+        "dob": {
+            "date": "1945-10-13T13:01:26.395Z",
+            "age": 77
+        },
+        "registered": {
+            "date": "2005-07-08T04:51:01.343Z",
+            "age": 17
+        },
+        "phone": "550-182-8247",
+        "cell": "079-590-6236",
+        "id": {
+            "name": "",
+            "value": null
+        },
+        "picture": {
+            "large": "https://randomuser.me/api/portraits/women/15.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/women/15.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/women/15.jpg"
+        },
+        "nat": "CA"
+    },
+    {
+        "gender": "male",
+        "name": {
+            "title": "Mr",
+            "first": "Bruno",
+            "last": "Nesheim"
+        },
+        "location": {
+            "street": {
+                "number": 133,
+                "name": "Carl Grøndahls vei"
+            },
+            "city": "Forset",
+            "state": "Akershus",
+            "country": "Norway",
+            "postcode": "0135",
+            "coordinates": {
+                "latitude": "51.4269",
+                "longitude": "-116.6891"
+            },
+            "timezone": {
+                "offset": "+7:00",
+                "description": "Bangkok, Hanoi, Jakarta"
+            }
+        },
+        "email": "bruno.nesheim@example.com",
+        "login": {
+            "uuid": "29c01300-6bf3-41de-b99e-b0cf122415f9",
+            "username": "purpletiger736",
+            "password": "mountain",
+            "salt": "AT9mhZ5C",
+            "md5": "900ade1cb479bd67bc01e53cfb515ed8",
+            "sha1": "fe399e143c2fba2cce03598b6ab13072ad50dee1",
+            "sha256": "6f59b31ecc9f77fc3ff801eb0fcc6bf937668379c9fd9db3cea7b86dfe25b8ae"
+        },
+        "dob": {
+            "date": "1947-08-10T08:23:48.724Z",
+            "age": 75
+        },
+        "registered": {
+            "date": "2015-09-23T21:19:14.716Z",
+            "age": 7
+        },
+        "phone": "21120395",
+        "cell": "90996999",
+        "id": {
+            "name": "FN",
+            "value": "10084708599"
+        },
+        "picture": {
+            "large": "https://randomuser.me/api/portraits/men/95.jpg",
+            "medium": "https://randomuser.me/api/portraits/med/men/95.jpg",
+            "thumbnail": "https://randomuser.me/api/portraits/thumb/men/95.jpg"
+        },
+        "nat": "NO"
+    }
+]
