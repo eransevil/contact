@@ -1,15 +1,34 @@
 <template>
   <div id="app">
     <AppHeader :contacts="contactsToShow" />
-    <div class="hero full main-layout" > </div>
+    <div class="hero full main-layout"></div>
     <div class="main-layout">
-      <input
-        v-if="contacts && contacts.length"
-        v-model="searchValue"
-        class="search-input"
-        type="search"
-        placeholder="Search..."
-      />
+      <div class="nav-container">
+        <input
+          v-if="contacts && contacts.length"
+          v-model="searchValue"
+          class="search-input"
+          type="search"
+          placeholder="Search..."
+        />
+
+        <div>
+          <select
+            class="select"
+            selected
+            v-model="selectedSort"
+            v-if="contacts && contacts.length"
+          >
+            <option disabled value="Sort By">Sort By</option>
+            <option value="Ascending">Ascending</option>
+            <option value="Descending">Descending</option>
+            <option value="Days until birthday">Days until birthday</option>
+          </select>
+        </div>
+        <div class="add-btn-container">
+          <button @click="addContact()" class="add-btn">ADD</button>
+        </div>
+      </div>
       <ContactsList
         v-if="contactsToShow && contactsToShow.length"
         class="main-layout"
@@ -17,9 +36,8 @@
         @contactDelete="contactDelete"
       />
       <div v-else>
-        <h3>You don't have contacts yet, try to add some</h3>
+        <h3>You don't have contacts , try add some</h3>
       </div>
-      <button @click="addContact()" class="add-btn">ADD</button>
     </div>
 
     <footer
@@ -35,19 +53,21 @@
 import AppHeader from "./components/Header.vue";
 import ContactsList from "./components/ContactsList.vue";
 import { contactService } from "../service/contact.service.js";
+import swal from "sweetalert2";
+import moment from "moment";
 export default {
   name: "App",
   data() {
     return {
       contacts: [],
       searchValue: "",
+      selectedSort: "Sort By",
     };
   },
   methods: {
     async fetchContacts() {
       //fetch the contact from "DB"
       this.contacts = await contactService.query(true);
-      console.log("contacts", this.contacts);
     },
 
     async addContact() {
@@ -62,13 +82,44 @@ export default {
         (contact) => contact._id === contactId
       );
       this.contacts.splice(idx, 1);
-      // this.fetchContacts();
+      swal.fire("", "Deleted successfully", "success");
     },
-  },
-  computed: {
-    contactsToShow() {
-      let tempContacts = this.contacts; //Do not make side effect in computed
-      tempContacts = tempContacts.filter(
+    sortContacts(tempContacts) {
+      //sort contact by the selected sort methods
+      if (this.selectedSort === "Days until birthday") {
+        tempContacts.forEach((contact) => {
+          this.daysUntilBirthday(contact);
+        });
+        return tempContacts.sort(
+          (contactA, contactB) => contactA.dob.diff - contactB.dob.diff
+        );
+      } else if (this.selectedSort === "Descending") {
+        return tempContacts.sort((contactA, contactB) =>
+          contactA.name.first < contactB.name.first
+            ? 1
+            : contactB.name.first < contactA.name.first
+            ? -1
+            : 0
+        );
+      } else {
+        return tempContacts.sort((contactA, contactB) =>
+          contactA.name.first > contactB.name.first
+            ? 1
+            : contactB.name.first > contactA.name.first
+            ? -1
+            : 0
+        );
+      }
+    },
+    daysUntilBirthday(contactObj) {
+      const date = contactObj.dob.date;
+      var birthday = moment(date);
+      var today = moment().format("YYYY-MM-DD");
+      contactObj.dob.diff = birthday.diff(today, "days") % 365; //the % is for calculate the days relevant for the current year
+      console.log(contactObj.dob.diff);
+    },
+    filterBySearchWord(tempContacts) {
+      return tempContacts.filter(
         (contact) =>
           contact.name.first
             .toLowerCase()
@@ -77,13 +128,14 @@ export default {
             .toLowerCase()
             .includes(this.searchValue.toLowerCase())
       );
-      return tempContacts.sort((contactA, contactB) =>
-        contactA.name.first > contactB.name.first
-          ? 1
-          : contactB.name.first > contactA.name.first
-          ? -1
-          : 0
-      );
+    },
+  },
+
+  computed: {
+    contactsToShow() {
+      let tempContacts = this.contacts; //Do not make side effect in computed
+      tempContacts = this.filterBySearchWord(tempContacts);
+      return this.sortContacts(tempContacts);
     },
   },
   components: {
@@ -116,10 +168,9 @@ body {
   letter-spacing: 0.1rem;
   display: block;
 }
-
 .hero {
   margin-bottom: 40px;
-  height: 60vh;
+  height: 50vh;
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.123), rgba(0, 0, 0, 0.178)),
     url(https://images.unsplash.com/photo-1557180295-76eee20ae8aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80);
@@ -127,7 +178,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .main-layout {
   display: grid;
   grid-template-columns: minmax(2rem, 1fr) minmax(auto, 1100px) minmax(
@@ -142,6 +192,14 @@ body {
 .main-layout > .full {
   grid-column: 1/-1;
 }
+
+.nav-container {
+  display: flex;
+}
+.add-btn-container {
+  margin-left: auto;
+  width: 190px;
+}
 .add-btn {
   cursor: pointer;
   width: 170px;
@@ -152,7 +210,6 @@ body {
   font-weight: 600;
   font-size: 18px;
   letter-spacing: 0.1em;
-  margin-left: 8px;
   margin-bottom: 20px;
   opacity: 0.8;
 }
@@ -171,6 +228,10 @@ body {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
   border-radius: 5px;
 }
+
+input[type="search"]::-webkit-search-cancel-button:hover {
+  cursor: pointer;
+}
 .footer {
   height: 45px;
   bottom: 0;
@@ -183,7 +244,22 @@ body {
   align-self: center;
   justify-self: center;
 }
+
 .fixed {
   position: fixed;
+}
+.select {
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  color: rgb(120 119 119);
+  background: rgb(241, 236, 236);
+  padding: 0 15px;
+  font-size: 16px;
+  box-shadow: rgb(0 0 0 / 15%) 0px 2px 8px;
+  cursor: pointer;
+  height: 60px;
+  outline: none;
 }
 </style>

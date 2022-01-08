@@ -9,10 +9,9 @@ export const contactService = {
     save,
 }
 
-async function query( first) {
+async function query(firstQuery) {
     var contacts = await storageService.query(DB_MOC_NAME)
-    console.log(contacts)
-    if (!contacts.length && first) {
+    if (!contacts.length && firstQuery) {
         console.log('DB', DB)
         contacts = JSON.parse(JSON.stringify(DB))
         utilService.saveToStorage(DB_MOC_NAME, DB)

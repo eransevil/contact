@@ -9,7 +9,7 @@
         >You have {{ contacts.length }} Contacts from
         {{ numberOfContrires }} different countries
       </span>
-      <h3 class="contacts-num" v-else> CONTACT MISSION</h3>
+      <h3 class="contacts-num" v-else>CONTACT MISSION</h3>
     </div>
   </header>
 </template>
@@ -19,7 +19,8 @@ export default {
   name: "AppHeader",
   props: ["contacts"],
   computed: {
-    numberOfContrires() { //reduce the number of countries
+    numberOfContrires() {
+      //reduce the number of countries
       const contriesObj = this.contacts.reduce((acc, currVal) => {
         if (!acc[currVal.location.country]) acc[currVal.location.country] = 0;
         acc[currVal.location.country]++;
@@ -43,6 +44,7 @@ export default {
   top: 0;
   box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
   position: sticky;
+  z-index: 100;
 }
 .inner-header-container {
   display: flex;

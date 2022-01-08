@@ -10,19 +10,19 @@
       />
       <div class="inner-card-container">
         <div class="row">
-          <span class="cell"
+          <span class="name-cell cell"
             >{{ contactObj.name.title }} {{ contactObj.name.first }}
             {{ contactObj.name.last }}</span
           >
         </div>
         <div class="row">
-          <a class="cell" :href="'mailto:' + contactObj.email">
+          <a class="cell email-cell" :href="'mailto:' + contactObj.email">
             {{ contactObj.email }}
           </a>
         </div>
         <div class="btn-container">
           <button @click="isMoreInfoModalOpen = true" class="btn more-info-btn">
-            More information
+            More Information
           </button>
           <button class="btn delete-btn" @click="isDeleteModalOpen = true">
             Delete
@@ -48,6 +48,7 @@
             class="modal"
             @closeModal="isMoreInfoModalOpen = false"
             :contactObj="contactObj"
+            @OpenDeleteModal="isDeleteModalOpen = true"
           />
         </div>
       </div>
@@ -139,6 +140,7 @@ export default {
 
 .btn-container .btn {
   padding: 10px 20px;
+  box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
 }
 
 .modal-container {
@@ -173,5 +175,18 @@ export default {
   margin: 5% auto 15% auto;
   border: 1px solid #888;
   width: 50%;
+}
+.name-cell {
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.email-cell {
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+.email-cell:hover {
+  opacity: 1;
 }
 </style>

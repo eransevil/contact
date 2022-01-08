@@ -18,6 +18,14 @@
       {{ contactObj.email }}
     </a>
     <span> {{ formetDate() }} ({{ contactObj.dob.age }}) </span>
+
+    <button
+      class="btn delete-btn"
+      style="width: 150px; margin-left: auto"
+      @click="OpenDeleteModal()"
+    >
+      Delete
+    </button>
   </div>
 </template>
 
@@ -35,6 +43,9 @@ export default {
     closeModal() {
       this.$emit("closeModal");
     },
+    OpenDeleteModal(){
+        this.$emit('OpenDeleteModal')
+    }
   },
 };
 </script>
